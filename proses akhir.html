@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dior - Pembayaran</title>
+  <style>
+    body { 
+      background:#fce8e8; 
+      font-family:Georgia,serif; 
+      text-align:center; 
+    }
+    .kotak { 
+      background:white; 
+      width:350px; 
+      margin:60px auto; 
+      padding:30px; 
+      border-radius:12px; 
+    }
+    .ringkasan { 
+      border:1px solid #e0a0b0; 
+      border-radius:8px; 
+      padding:15px; 
+      text-align:left; 
+      margin:15px 0; 
+      font-size:13px; 
+      color:#555; 
+    }
+    .ringkasan p {
+       margin:6px 0; 
+      }
+    .total { 
+      font-weight:bold; 
+      color:#b07080; 
+      border-top:1px solid #eee; 
+      padding-top:8px; 
+    }
+    a { display:block; 
+      background:#b07080; 
+      color:white; 
+      padding:12px; 
+      border-radius:8px; 
+      text-decoration:none;
+      margin-top:10px; 
+      font-size:14px; 
+    }
+    .kembali { 
+      background:none; 
+      color:#b07080; 
+      border:1px solid #b07080; 
+      }
+  </style>
+</head>
+<body>
+  <div class="kotak">
+    <h2>PEMBAYARAN</h2>
+    <div class="ringkasan" id="ringkasan"></div>
+    <a href="selesai.html">BAYAR SEKARANG</a>
+    <a class="kembali" href="tugas sumatif akhir semester.html">← Kembali</a>
+  </div>
+
+  <script>
+    // Data produk, nama dan harga
+    var produk = ['Miss Dior', 'Miss Dior Blooming', "J'adore EDP", 'Dior Addict', 'Hypnotic Poison'];
+    var harga  = [1850000, 1650000, 3000000, 3016000, 2750000];
+
+    // Ambil semua input number dari halaman sebelumnya
+    var qty    = JSON.parse(localStorage.getItem('pesanan') || '[]');
+
+    var isi    = '';
+    var total  = 0;
+
+    for (var i = 0; i < produk.length; i++) {
+      if (qty[i] > 0) {
+        var sub = qty[i] * harga[i];
+        total  += sub;
+        isi    += '<p>' + produk[i] + ' x' + qty[i] + ' = Rp ' + sub.toLocaleString('id-ID') + '</p>';
+      }
+    }
+
+    if (isi == '') isi = '<p>Tidak ada produk dipilih.</p>';
+    isi += '<p class="total">Total : Rp ' + total.toLocaleString('id-ID') + '</p>';
+    document.getElementById('ringkasan').innerHTML = isi;
+  </script>
+</body>
+</html> 
